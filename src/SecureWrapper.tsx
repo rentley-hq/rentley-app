@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ACCESS_CODE = import.meta.env.VITE_ACCESS_CODE;
 
 export default function SecureWrapper({ children }: { children: React.ReactNode }) {
-  const [input, setInput] = useState("");
   const [accessGranted, setAccessGranted] = useState(false);
 
+  useEffect(() => {
+    const stored = localStorage.getItem("rentley_access");
+    if (stored === "true") setAccessGranted(true);
+  }, []);
+
+  const handleLogin = (input: string) => {
+    if (input === ACCESS_CODE) {
+      setAccessGranted(true);
+      localStorage.setItem("rentley_access", "true");
+    }
+  };
+
   if (accessGranted) return <>{children}</>;
+
+  const [input, setInput] = useState("");
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
@@ -20,7 +33,7 @@ export default function SecureWrapper({ children }: { children: React.ReactNode 
           className="w-full border rounded-md px-3 py-2 mb-4"
         />
         <button
-          onClick={() => setAccessGranted(input === ACCESS_CODE)}
+          onClick={() => handleLogin(input)}
           className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700"
         >
           Weiter
