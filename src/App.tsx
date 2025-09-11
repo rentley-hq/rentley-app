@@ -1,105 +1,82 @@
-import { useState } from 'react';
+import React from "react";
+import ServiceCard from "./components/ServiceCard";
+import ComingSoonCard from "./components/ComingSoonCard";
 
-export default function App(){
-  const [role, setRole] = useState<'mieter'|'vermieter'>('mieter');
+function App() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      <Header onSwitch={()=> setRole(r => r==='mieter'?'vermieter':'mieter')} role={role} />
-      <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
-        {role==='mieter' ? <TenantHome/> : <LandlordHome/>}
-      </main>
-      <Footer/>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header */}
+      <header className="bg-white shadow-md sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-indigo-600">Rentley</h1>
+          <nav className="space-x-6 text-gray-600 font-medium">
+            <a href="#mieter">Mieter-Services</a>
+            <a href="#vermieter">Vermieter-Services</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="bg-indigo-600 text-white text-center py-16 px-6">
+        <h2 className="text-4xl font-bold mb-4">Transparenz & Sicherheit im Mietmarkt</h2>
+        <p className="text-lg mb-6">
+          Schnell, anonym und fair – unsere Plattform unterstützt Mieter & Vermieter mit digitalen Services.
+        </p>
+        <a
+          href="#mieter"
+          className="bg-white text-indigo-600 font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100"
+        >
+          Jetzt starten
+        </a>
+      </section>
+
+      {/* Mieter Services */}
+      <section id="mieter" className="max-w-6xl mx-auto py-16 px-6">
+        <h3 className="text-2xl font-bold mb-8">Für Mieter</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ServiceCard
+            title="Mietvertrags-Check"
+            description="Laden Sie Ihren Mietvertrag hoch und erhalten Sie innerhalb von 24h eine strukturierte Analyse."
+            price="49 €"
+            cta="Vertrag prüfen"
+          />
+          <ServiceCard
+            title="Zusatzfragen"
+            description="Haben Sie eine spezielle Frage zu Ihrem Vertrag oder einem Paragraphen?"
+            price="+24 €"
+            cta="Frage stellen"
+          />
+          <ServiceCard
+            title="Konfliktmanagement"
+            description="Offizielles Tracking von Problemen, Mediation & Androhung von öffentlicher Bewertung."
+            price="ab 49 €"
+            cta="Konflikt melden"
+          />
+        </div>
+      </section>
+
+      {/* Vermieter Services */}
+      <section id="vermieter" className="bg-gray-100 py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-2xl font-bold mb-8">Für Vermieter</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <ComingSoonCard title="Mieter-Screening" />
+            <ComingSoonCard title="Nomaden-Check" />
+            <ComingSoonCard title="Dashboard & Reports" />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-white border-t py-6 mt-auto">
+        <div className="max-w-6xl mx-auto px-6 text-gray-500 text-sm flex justify-between">
+          <p>© {new Date().getFullYear()} Rentley – Alle Rechte vorbehalten.</p>
+          <p>Impressum · Datenschutz</p>
+        </div>
+      </footer>
     </div>
   );
 }
 
-function Header({ onSwitch, role }:{ onSwitch: ()=>void; role:'mieter'|'vermieter'}){
-  return (
-    <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/70 border-b border-gray-200">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-2xl bg-gray-900 text-white grid place-items-center font-bold">R</div>
-          <div className="font-semibold tracking-tight">Rentley <span className="text-gray-400 font-normal">(MVP)</span></div>
-        </div>
-        <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700">
-          <a className="hover:text-gray-900" href="#services">Services</a>
-          <a className="hover:text-gray-900" href="#faq">FAQ</a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <button onClick={onSwitch} className="rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm hover:bg-gray-100">
-            {role==='mieter' ? 'Zu Vermieter-Services' : 'Zu Mieter-Services'}
-          </button>
-          <button className="rounded-xl bg-gray-900 text-white px-3 py-2 text-sm">Anmelden</button>
-        </div>
-      </div>
-    </header>
-  );
-}
+export default App;
 
-function Card({title, children}:{title:string; children:React.ReactNode}){
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-      <div className="text-lg font-semibold">{title}</div>
-      <div className="mt-2 text-sm text-gray-600">{children}</div>
-    </div>
-  );
-}
-
-function TenantHome(){
-  return (
-    <section className="grid md:grid-cols-2 gap-6" id="services">
-      <Card title="Mietvertrags‑Check (24h) – 49 €">
-        Lade deinen Mietvertrag hoch und erhalte eine verständliche Zusammenfassung samt Stolperfallen. Dies ist eine **informative Einschätzung** – keine Rechtsberatung.
-        <div className="mt-4 flex gap-2">
-          <button className="rounded-2xl bg-gray-900 text-white px-4 py-2 text-sm">Jetzt prüfen lassen</button>
-          <button className="rounded-2xl border border-gray-300 bg-white px-4 py-2 text-sm">Mehr erfahren</button>
-        </div>
-      </Card>
-      <Card title="Bewertungen: Vermieter & Objekte">
-        Suche nach Adresse oder Vermieternamen und teile anonym deine Erfahrung. Moderiert, DSGVO‑freundlich.
-      </Card>
-      <Card title="Konflikt‑Management (Coming Soon)">
-        Offizielles, dokumentiertes Schlichtungsfenster (14 Tage) mit fairen Erinnerungen und optionaler Mediation.
-      </Card>
-    </section>
-  );
-}
-
-function LandlordHome(){
-  return (
-    <section className="grid md:grid-cols-2 gap-6" id="services">
-      <Card title="Tenant Trust Badge (Coming Soon)">
-        Einladungslink zur Bonitäts-/Identitätsprüfung des Mieters. DSGVO‑konform, transparent.
-      </Card>
-      <Card title="Nomaden‑Check (Coming Soon)">
-        Case‑basierter Risikoindikator mit rechtssicherer Dokumentation.
-      </Card>
-      <Card title="Screening‑Link – 29 € (Beta)">
-        Einmaliger Screening‑Link pro Interessent: strukturierte Angaben + Uploads + Einwilligung. Ergebnisse in deinem Dashboard.
-      </Card>
-    </section>
-  );
-}
-
-function Footer(){
-  return (
-    <footer className="mt-16 border-t border-gray-200 bg-white">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 text-sm text-gray-600">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-2xl bg-gray-900 text-white grid place-items-center font-bold">R</div>
-            <div>
-              <div className="font-semibold">Rentley</div>
-              <div className="text-xs text-gray-500">Datensparsam • DSGVO‑freundlich • EU‑Hosting</div>
-            </div>
-          </div>
-          <div className="flex gap-4 text-xs">
-            <a href="#" className="hover:text-gray-900">Impressum</a>
-            <a href="#" className="hover:text-gray-900">Datenschutz</a>
-            <a href="#" className="hover:text-gray-900">Richtlinien</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
