@@ -1,3 +1,5 @@
+// Checkpoint before big mockup integration
+
 import React from "react";
 import ServiceCard from "./components/ServiceCard";
 import ComingSoonCard from "./components/ComingSoonCard";
@@ -79,4 +81,5 @@ function App() {
 }
 
 export default App;
+
 
