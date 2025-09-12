@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import Hero from "../components/Hero";
 import Ratings from "../components/Ratings";
 import ContractCheck from "../components/ContractCheck";
+import ConflictManagement from "../components/ConflictManagement"; // ✅ NEU
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 
@@ -16,6 +17,7 @@ export default function MieterPage() {
       <main className="flex-grow">
         <Ratings />
         <ContractCheck />
+        <ConflictManagement /> {/* ✅ HIER eingefügt */}
         <FAQ faqOpen={faqOpen} setFaqOpen={setFaqOpen} />
       </main>
       <Footer />
