@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import ReviewModal from "./ReviewModal";
 
 export default function Ratings() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section id="bewertungen" className="max-w-4xl mx-auto py-16 px-6">
       <h3 className="text-2xl font-bold mb-6">🔎 Bewertungen durchsuchen</h3>
@@ -28,14 +31,21 @@ export default function Ratings() {
         </p>
       </div>
 
+      {/* Buttons */}
       <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
-        <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
+        <button
+          onClick={() => setModalOpen(true)}
+          className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700"
+        >
           📝 Neue Bewertung schreiben
         </button>
         <button className="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300">
           📮 Vermieter kontaktieren
         </button>
       </div>
+
+      {/* Modal */}
+      <ReviewModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
