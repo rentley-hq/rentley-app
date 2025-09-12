@@ -7,11 +7,11 @@ export default {
         sans: ["Inter", "sans-serif"],
       },
       colors: {
-        brand: "#111827",
-        accent: "#2563eb",
-        muted: "#6b7280",
-        highlight: "#facc15",
-        bg: "#f9fafb",
+        brand: "#111827",    // Dunkles Grau/Navy für Texte
+        accent: "#2563eb",   // Blau für Buttons & Links
+        muted: "#6b7280",    // Grautöne
+        highlight: "#facc15", // Gelb für Sterne
+        bg: "#f9fafb",       // Heller Hintergrund
       },
     },
   },
