@@ -4,31 +4,31 @@ import Ratings from "../components/Ratings";
 import ContractCheck from "../components/ContractCheck";
 import ConflictManagement from "../components/ConflictManagement";
 import FAQ from "../components/FAQ";
-import ReviewModal from "../components/ReviewModal";
 
 export default function MieterPage() {
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  const [reviewModalOpen, setReviewModalOpen] = useState(false);
 
   return (
     <Layout>
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="bg-accent text-white text-center py-20 px-6">
-        <h1 className="text-5xl font-bold mb-4">Miettransparenz für alle</h1>
-        <p className="text-lg max-w-2xl mx-auto mb-6 text-gray-100">
-          Bewertungen lesen und schreiben, Mietverträge prüfen lassen und
-          Konflikte offiziell dokumentieren – alles auf einer Plattform.
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          Miettransparenz für alle
+        </h1>
+        <p className="text-lg max-w-2xl mx-auto mb-8 text-white/90">
+          Bewerte deinen Vermieter oder deine Wohnung. Lass deinen Mietvertrag
+          prüfen. Schütze dich – und hilf anderen Mietern in ganz Österreich.
         </p>
-        <button
-          onClick={() => setReviewModalOpen(true)}
+        <a
+          href="#bewertungen"
           className="bg-white text-accent font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100"
         >
-          ⭐ Erste Bewertung abgeben
-        </button>
+          Jetzt starten
+        </a>
       </section>
 
       {/* Bewertungen */}
-      <Ratings onOpenReview={() => setReviewModalOpen(true)} />
+      <Ratings />
 
       {/* Mietvertrags-Check */}
       <ContractCheck />
@@ -38,12 +38,6 @@ export default function MieterPage() {
 
       {/* FAQ */}
       <FAQ faqOpen={faqOpen} setFaqOpen={setFaqOpen} />
-
-      {/* Review Modal */}
-      <ReviewModal
-        isOpen={reviewModalOpen}
-        onClose={() => setReviewModalOpen(false)}
-      />
     </Layout>
   );
 }
