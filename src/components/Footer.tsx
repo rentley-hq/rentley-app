@@ -1,12 +1,18 @@
 import React from "react";
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-white border-t py-6 mt-auto">
-      <div className="max-w-6xl mx-auto px-6 text-gray-500 text-sm flex flex-col sm:flex-row justify-between">
-        <p>© {new Date().getFullYear()} Rentley – Alle Rechte vorbehalten.</p>
-        <p>Impressum · Datenschutz · Kontakt</p>
+    <footer className="bg-white border-t border-gray-200 mt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-muted flex justify-between">
+        <span>MietRadar (Arbeitsname) • DSGVO-freundlich • EU-Hosting</span>
+        <div className="flex space-x-6">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Richtlinien</a>
+        </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
