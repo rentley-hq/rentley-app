@@ -1,2 +1,7 @@
 User-agent: *
 Disallow: /
+
+# Remove after launch:
+# User-agent: *
+# Allow: /
+# Sitemap: https://rentley.app/sitemap.xml
